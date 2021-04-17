@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test JSON</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="container">
+<header>
+    <div class = "container-fluid row" id="navigation">
+        <a class ="col-md-1 ">BieresEnLigne</a>
+        <div class="nav"><a href="index.html" id="nav">Nos bières</a> <a href="commande.html" id="nav" >Mes commandes</a> <a  id="nav" >Nous connaitre</a><div id="totalProduct" class="pull-right text-center">0</div> <svg id="panier" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" pull-right bi bi-cart-fill" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg></div>
+
+    </div>
+
+</header>
+
+
+<table id="tableau" class="table table-bordered">
+    <caption><h1>Détail de la commande</h1></caption>
+    <tr>
+        <th>Désignation article</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+    </tr>
+</table>
+
+<table id ="total" class="table table">
+    <tr>
+        <th>Total général</th>
+    </tr>
+</table>
+
+<script src="lib/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+    const baseUrl = 'http://localhost:9090/commandes'
+
+    // on recupere les variables dans l'URL sous forme de string
+    let url = location.search.substring(1);
+    // on la decoupe pour recuperer chaque variable dans un tableau
+    let variables = url.split("=");
+    let id = variables[1];
+
+
+
+    $(function() {
+        $.ajax({
+            url : baseUrl + '/' + id,
+            dataType: "json",
+            success: function (data) {
+                const resultat = data;
+
+                resultat.lignes.forEach(function (commande) {
+
+                    let ligne =
+
+                        '<tr>' +
+                        '<td>' + commande.article.designation +   '</td>' +
+                        '<td>' + commande.article.prix + '€</td>' +
+                        '<td>' +    commande.quantite +    '</td>' +
+                        '<td>' +    commande.total +    '€</td>' +
+                        '</tr>';
+
+                    $('#tableau').append(ligne);
+
+                })
+
+                let ligneTotal =
+
+                    '<tr>' +
+                    '<td>' + resultat.total + '€</td>' +
+                    '</tr>';
+
+                $('#total').append(ligneTotal);
+
+            },
+            error: function (resultat) {
+                alert('erreur chargement détail');
+            }
+        });
+    });
+</script>
+</body>
+</html>
