@@ -1,0 +1,69 @@
+#bieres{
+    height : 50%;
+    width:60%;
+    margin-top : 100px;
+    margin-right : auto;
+    margin-left : auto;
+    margin-bottom : 100px;
+    min-height:100px;
+}
+
+#articleBiere{
+    width:30%;
+    margin-bottom: 12px ;
+    margin-left: 20px ;
+}
+
+#nav{
+    font-size : 13px;
+    margin-left : 50px;
+}
+
+#navigation{
+    margin-top : 10px;
+    margin-left : 10px;
+}
+
+#panier{
+    margin-right : 10px;
+}
+
+#totalProduct{
+    background-color : grey;
+    color : white;
+    border-radius: 10px;
+    width : 15px;
+    margin-right : 10px;
+}
+
+#tableau{
+    margin-top: 200px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
